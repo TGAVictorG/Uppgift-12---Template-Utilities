@@ -1,30 +1,56 @@
 #pragma once
 namespace CommonUtilities
 {
-	///	• Max – tar två argument av samma typ och returnerar det största
 	template<typename T>
-	T Max(const T &value1, const T &value2);
+	T Max(const T& aValue1, const T& aValue2)
+	{
+		return aValue1 > aValue2 ? aValue1 : aValue2;
+	}
 
-	///	• Min – tar två argument av samma typ och returnerar det minsta
 	template<typename T>
-	T Min(const T &value1, const T &value2);
+	T Min(const T& aValue1, const T& aValue2)
+	{
+		return aValue1 < aValue2 ? aValue1 : aValue2;
+	}
 
-	///	• Abs – tar ett argument och returnerar alltid en positivt mängd av samma storlek
 	template<typename T>
-	T Abs(const T &value);
+	T Abs(const T& aValue)
+	{
+		return aValue < 0 ? aValue * -1 : aValue;
+	}
 
-	///	• Clamp – tar tre argument av samma typ : min, max, value. Om value är
-	///	mindre än min så returneras min.Om value är större än max så returneras
-	///	max, annars returneras value.
 	template<typename T>
-	T Clamp(const T value, const T& min, const T& max);
+	T Clamp(const T aValue, const T& aMinValue, const T& aMaxValue)
+	{
+		T min;
+		T max;
 
-	///	• Lerp – Tar två argument av samma typ samt ett tredje som är en float(a, b, c). Det tredje argumentet är en procentsats(a + c(b – a)).
-	template<typename T>
-	T Lerp(const T value1, const T& value2, float t);
+		if (aMinValue > aMaxValue)
+		{
+			min = aMaxValue;
+			max = aMinValue;
+		}
+		else
+		{
+			min = aMinValue;
+			max = aMaxValue;
+		}
 
-	///	• Swap – tar två argument av samma typ och byter data mellan dessa.
+		return aValue > max ? max : (aValue < min ? min : aValue);
+	}
+
 	template<typename T>
-	void Swap(T& value1, T& value2);
+	T Lerp(const T aValue1, const T& aValue2, float anInterpolant)
+	{
+		return aValue1 + anInterpolant * (aValue2 - aValue1);
+	}
+
+	template<typename T>
+	void Swap(T& aValue1, T& aValue2)
+	{
+		T temp = aValue1;
+		aValue1 = aValue2;
+		aValue2 = temp;
+	}
 };
 
